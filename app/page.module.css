@@ -50,3 +50,29 @@
   cursor: pointer;
   accent-color: #007bff;
 }
+.footer {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-top: 2px solid #e9ecef;
+  text-align: center;
+}
+
+.statsGrid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.statCard {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.footerInfo {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}

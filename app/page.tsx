@@ -8,6 +8,13 @@ export default function Home() {
   const [selectedUser, setSelectedUser] = useState('عبدالله');
   const users = ['عبدالله', 'سارة', 'كريم'];
 
+  // --- كود الحساب المظبوط ---
+  const startDate = new Date('2026-06-14');
+  const today = new Date();
+  const diffTime = today.getTime() - startDate.getTime();
+  const diffDays = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+  // -------------------------
+
   const fetchMeds = async () => {
     const { data } = await supabase
       .from('medications')
@@ -17,11 +24,9 @@ export default function Home() {
     if (data) setMeds(data);
   };
 
-  // دالة التبديل مع إضافة الصوت
   const toggleMed = async (id: number, currentStatus: boolean) => {
-    // تشغيل الصوت عند الضغط
     const audio = new Audio('/ding-check.mp3');
-    audio.play().catch(e => console.log("الصوت محتاج تفاعل مستخدم:", e));
+    audio.play().catch(e => console.log("الصوت:", e));
 
     const { error } = await supabase
       .from('medications')
@@ -81,6 +86,23 @@ export default function Home() {
           />
         </div>
       ))}
+
+      <footer className={styles.footer}>
+        <div className={styles.statsGrid}>
+          {users.map(user => {
+            const userTakenCount = meds.filter(m => m.taken_by === user && m.status).length;
+            return (
+              <div key={user} className={styles.statCard}>
+                <div style={{ fontSize: '12px', color: '#666' }}>{user}</div>
+                <div style={{ fontWeight: 'bold', fontSize: '16px' }}>{userTakenCount}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.footerInfo}>
+          متابعين علاج ماما بكل حب ❤️ | اليوم رقم {diffDays}
+        </div>
+      </footer>
     </div>
   );
 }
