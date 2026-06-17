@@ -93,7 +93,7 @@ export default function Home() {
             const userTakenCount = meds.filter(m => m.taken_by === user && m.status).length;
             return (
               <div key={user} className={styles.statCard}>
-                <div style={{ fontSize: '12px', color: '#666' }}>{user}</div>
+                <div style={{ fontSize: '12px', color: '#ff0202' }}>{user}</div>
                 <div style={{ fontWeight: 'bold', fontSize: '16px' }}>{userTakenCount}</div>
               </div>
             );
